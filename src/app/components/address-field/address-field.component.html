@@ -1,0 +1,36 @@
+<div class="address-field">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      [placeholder]="placeholder"
+      [value]="searchInput()"
+      (input)="handleInput($event)"
+      autocomplete="off"
+      aria-label="Address input"
+    />
+    <mat-spinner
+      *ngIf="loading()"
+      matSuffix
+      diameter="20"
+      aria-label="Loading address suggestions"
+    ></mat-spinner>
+  </mat-form-field>
+
+  <mat-nav-list
+    *ngIf="suggestions().length"
+    class="suggestions-dropdown"
+    aria-label="Address suggestions"
+    role="listbox"
+  >
+    <mat-list-item
+      *ngFor="let suggestion of suggestions()"
+      (click)="selectAddress(suggestion)"
+      class="suggestion-item"
+      role="option"
+      [attr.aria-label]="suggestion.display_name"
+    >
+      {{ suggestion.display_name }}
+    </mat-list-item>
+  </mat-nav-list>
+</div>

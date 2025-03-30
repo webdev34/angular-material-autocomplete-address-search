@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AddressFieldComponent } from './components/address-field/address-field.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, AddressFieldComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'address-autocomplete';
+  selectedAddress: any;
+
+  handleAddressSelected(address: any) {
+    this.selectedAddress = address;
+  }
 }

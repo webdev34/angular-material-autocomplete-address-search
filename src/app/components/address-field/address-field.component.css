@@ -1,0 +1,32 @@
+.address-field {
+  position: relative;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-nav-list {
+  max-width: 600px;
+  max-height: 200px;
+  overflow: auto;
+  z-index: 10;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  position: absolute;
+}
+
+mat-list-item.mat-mdc-list-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0;
+
+  &:hover {
+    background: lightblue;
+  }
+}
+
+mat-spinner {
+  margin-right: 10px
+}
