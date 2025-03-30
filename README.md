@@ -20,6 +20,11 @@ npm install
 ```
 
 ## Development server
+**MUST HAVE ANGULAR CLI INSTALLED**
+
+```bash
+npm install -g @angular/cli
+```
 
 To start a local development server, run:
 
