@@ -25,12 +25,11 @@ export class AddressFieldComponent {
   @Input() label = 'Address';
   @Output() addressSelected = new EventEmitter<any>();
 
-  // Replace FormControl with a signal
   searchInput = signal('');
   loading = signal(false);
 
   // Computed signal for suggestions
-  suggestions = computed(() => this.searchInput().length >= 1 ? this.addressService.suggestions() : []);
+  suggestions = computed(() => this.searchInput().length >= 3 ? this.addressService.suggestions() : []);
 
   constructor(private addressService: AddressService) {
     // Effect to trigger search on input change
@@ -52,7 +51,6 @@ export class AddressFieldComponent {
   }
 
   selectAddress(address: any) {
-    console.log(address);
     const structuredAddress: IStructuredAddress = {
       fullAddress: address.display_name,
       street: address.address.road || '',

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AddressService } from './address-service.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AddressService', () => {
   let service: AddressService;
@@ -9,8 +10,11 @@ describe('AddressService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AddressService],
+      providers: [
+        AddressService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     });
 
     service = TestBed.inject(AddressService);
@@ -44,9 +48,6 @@ describe('AddressService', () => {
 
       expect(service.suggestions()).toEqual(mockResponse);
       done();
-    }, 300); // debounce
+    }, 300);
   });
-
 });
-export { AddressService };
-
