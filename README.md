@@ -10,7 +10,7 @@ Follow these steps to set up and run the Address Autocomplete Angular applicatio
 
 ```bash
 git clone https://github.com/webdev34/angular-material-autocomplete-address-search.git
-cd address-autocomplete
+cd angular-material-autocomplete-address-search
 ```
 
 ## Install Dependencies
