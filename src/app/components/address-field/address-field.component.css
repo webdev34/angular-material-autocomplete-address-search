@@ -4,29 +4,31 @@
 
 mat-form-field {
   width: 100%;
+  margin-bottom: -20px;
 }
 
 mat-nav-list {
-  max-width: 600px;
-  max-height: 200px;
+  width: inherit;
+  max-height: 400px;
   overflow: auto;
-  z-index: 10;
   background: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  position: absolute;
-}
 
-mat-list-item.mat-mdc-list-item {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 0;
+  mat-list-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 0;
 
-  &:hover {
-    background: lightblue;
+    &:hover {
+      background: lightblue;
+    }
+    &.focused {
+      background: lightblue;
+    }
   }
 }
 
 mat-spinner {
-  margin-right: 10px
+  margin-right: 10px;
 }

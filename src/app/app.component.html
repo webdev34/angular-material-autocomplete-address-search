@@ -1,24 +1,21 @@
-<main class="main" role="main" aria-label="Address autocomplete application">
-  <div class="container">
-    <h2 id="autocomplete-heading">Address Autocomplete</h2>
+<main class="main" role="main" aria-label="Address autocomplete demo">
+  <h2>Address Autocomplete Demo</h2>
 
-    <div class="address-field-wrapper" aria-labelledby="autocomplete-heading">
+  <form
+    [formGroup]="addressForm"
+  >
       <app-address-field
-        label="Your Address"
-        placeholder="Start typing your address..."
+        label="Address"
+        placeholder="Start typing address..."
         (addressSelected)="handleAddressSelected($event)"
-        aria-label="Address input field with autocomplete suggestions">
+      >
       </app-address-field>
-    </div>
+  </form>
 
-    <div
-      *ngIf="selectedAddress"
-      aria-label="Selected structured address"
-    >
-      <h3 id="selected-address-heading">Selected Address:</h3>
-      <strong aria-labelledby="selected-address-heading">
-        {{ selectedAddress?.fullAddress }}
-      </strong>
+  <div *ngIf="selectedAddress" class="address-summary-grid">
+    <div *ngFor="let address of selectedAddress | keyvalue">
+      <div class="address-object-label">{{ address.key | camelCaseToLabelDisplay}}</div>
+      <div class="address-object-value">{{ address.value || '—' }}</div>
     </div>
   </div>
 </main>

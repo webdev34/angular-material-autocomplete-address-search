@@ -1,11 +1,12 @@
 <div class="address-field">
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>{{ label }}</mat-label>
-    <input
+      <input
       matInput
       [placeholder]="placeholder"
       [value]="searchInput()"
       (input)="handleInput($event)"
+      (keydown)="handleKeyDown($event)"
       autocomplete="off"
       aria-label="Address input"
     />
@@ -17,16 +18,12 @@
     ></mat-spinner>
   </mat-form-field>
 
-  <mat-nav-list
-    *ngIf="suggestions().length"
-    class="suggestions-dropdown"
-    aria-label="Address suggestions"
-    role="listbox"
-  >
+  <mat-nav-list *ngIf="suggestions().length" role="listbox">
     <mat-list-item
-      *ngFor="let suggestion of suggestions()"
+      *ngFor="let suggestion of suggestions(); let i = index;"
       (click)="selectAddress(suggestion)"
-      class="suggestion-item"
+      [class.focused]="i === focusedIndex()"
+      [attr.aria-selected]="i === focusedIndex()"
       role="option"
       [attr.aria-label]="suggestion.display_name"
     >

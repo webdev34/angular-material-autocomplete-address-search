@@ -21,12 +21,13 @@ import { IStructuredAddress } from '../../interfaces/structured-address';
   styleUrls: ['./address-field.component.css']
 })
 export class AddressFieldComponent {
-  @Input() placeholder = 'Enter an address...';
-  @Input() label = 'Address';
+  @Input({ required: true }) label!: string;
+  @Input({ required: true }) placeholder!: string;
   @Output() addressSelected = new EventEmitter<any>();
 
   searchInput = signal('');
   loading = signal(false);
+  focusedIndex = signal<number>(-1);
 
   // Computed signal for suggestions
   suggestions = computed(() => this.searchInput().length >= 3 ? this.addressService.suggestions() : []);
@@ -46,7 +47,9 @@ export class AddressFieldComponent {
     // Effect to stop loading after suggestions arrive
     effect(() => {
       this.suggestions(); // tracks updates
+      this.suggestions();
       this.loading.set(false);
+      this.focusedIndex.set(-1);
     });
   }
 
@@ -70,5 +73,34 @@ export class AddressFieldComponent {
   handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchInput.set(input.value);
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    const total = this.suggestions().length;
+    const current = this.focusedIndex();
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (current === -1 && total > 0) {
+        this.focusedIndex.set(0);
+      } else if (current < total - 1) {
+        this.focusedIndex.set(current + 1);
+      }
+    }
+
+    else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (current > 0) {
+        this.focusedIndex.set(current - 1);
+      }
+    }
+
+    else if (event.key === 'Enter') {
+      event.preventDefault();
+      const currentSuggestion = this.suggestions()[this.focusedIndex()];
+      if (currentSuggestion) {
+        this.selectAddress(currentSuggestion);
+      }
+    }
   }
 }
