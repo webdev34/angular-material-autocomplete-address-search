@@ -29,11 +29,9 @@ export class AddressFieldComponent {
   loading = signal(false);
   focusedIndex = signal<number>(-1);
 
-  // Computed signal for suggestions
   suggestions = computed(() => this.searchInput().length >= 3 ? this.addressService.suggestions() : []);
 
   constructor(private addressService: AddressService) {
-    // Effect to trigger search on input change
     effect(() => {
       const query = this.searchInput();
       if (query.length >= 3) {
@@ -44,9 +42,7 @@ export class AddressFieldComponent {
       }
     });
 
-    // Effect to stop loading after suggestions arrive
     effect(() => {
-      this.suggestions(); // tracks updates
       this.suggestions();
       this.loading.set(false);
       this.focusedIndex.set(-1);
