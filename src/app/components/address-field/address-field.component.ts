@@ -40,12 +40,11 @@ export class AddressFieldComponent {
       } else {
         this.loading.set(false);
       }
-    });
 
-    effect(() => {
-      this.suggestions();
-      this.loading.set(false);
-      this.focusedIndex.set(-1);
+      if (this.suggestions().length) {
+        this.loading.set(false);
+        this.focusedIndex.set(-1);
+      }
     });
   }
 
